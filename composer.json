@@ -1,5 +1,5 @@
 {
-    "name": "dilab/omnipay-ipay88",
+    "name": "ManasAtabaev/omnipay-ipay88",
     "description": "iPay88 gateway for Omnipay payment processing library",
     "keywords": [
         "gateway",
@@ -13,15 +13,19 @@
         {
             "name": "xu ding",
             "email": "thedilab@gmail.com"
+        },
+        {
+            "name": "Manas Manas",
+            "email": "manas.atabaev@gmail.com"
         }
     ],
     "minimum-stability": "stable",
     "require": {
-        "omnipay/common": "^3.0.0",
+        "omnipay/common": "^3.2",
         "php-http/guzzle6-adapter": "^2.0"
     },
     "require-dev": {
-        "omnipay/tests": "^3.0.0"
+        "omnipay/tests": "^3.2"
     },
     "autoload": {
         "psr-4": { "Omnipay\\IPay88\\" : "src/" }
