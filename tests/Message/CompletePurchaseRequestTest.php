@@ -3,6 +3,7 @@
 namespace Omnipay\IPay88\Message;
 
 use Omnipay\Tests\TestCase;
+use Omnipay\IPay88\Gateway;
 
 class CompletePurchaseRequestTest extends TestCase
 {
@@ -26,7 +27,7 @@ class CompletePurchaseRequestTest extends TestCase
             'AuthCode' => '',
             'Status' => 1,
             'ErrDesc' => '',
-            'Signature' => '0X0Yq8zEmJ3ddMtn8e/1suethT8='
+            'Signature' => 'a07d3e1415f31275b630523e540c0a89f295344b447311dc8f09995e0059abae'
         ]);
 
         $this->request->initialize([
@@ -34,7 +35,8 @@ class CompletePurchaseRequestTest extends TestCase
                 'firstName' => 'Xu',
                 'lastName' => 'Ding',
                 'email' => 'xuding@spacebib.com',
-                'number' => '93804194'
+                'number' => '93804194',
+                'phone' => '93804194'
             ],
             'amount' => '1.00',
             'currency' => 'MYR',
@@ -53,8 +55,7 @@ class CompletePurchaseRequestTest extends TestCase
     public function testGetDataReturnCorrectComputedSignature()
     {
         $data = $this->request->getData();
-
-        $this->assertSame('0X0Yq8zEmJ3ddMtn8e/1suethT8=', $data['ComputedSignature']);
+        $this->assertSame('a07d3e1415f31275b630523e540c0a89f295344b447311dc8f09995e0059abae', $data['ComputedSignature']);
     }
 
     public function testSendSuccess()

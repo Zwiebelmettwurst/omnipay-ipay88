@@ -60,7 +60,7 @@ class GatewayTest extends GatewayTestCase
             'AuthCode' => '',
             'Status' => 1,
             'ErrDesc' => '',
-            'Signature' => 'a4THdPHQG9jT3DPZZ/mabkXUqow='
+            'Signature' => 'bccead37a7a3732cdf46554eb136399bdb28b2bc3cdf5b8802357770c29bb38b'
         ]);
 
         $this->setMockHttpResponse('CompletePurchaseRequestReQuerySuccess.txt');

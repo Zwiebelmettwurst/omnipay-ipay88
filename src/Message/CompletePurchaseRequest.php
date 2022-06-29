@@ -4,7 +4,7 @@ namespace Omnipay\IPay88\Message;
 
 class CompletePurchaseRequest extends AbstractRequest
 {
-    protected $endpoint = 'https://www.mobile88.com/epayment/enquiry.asp';
+    protected $endpoint = 'https://payment.ipay88.com.my/epayment/enquiry.asp';
 
     public function getData()
     {
@@ -39,7 +39,7 @@ class CompletePurchaseRequest extends AbstractRequest
         return $this->response = new CompletePurchaseResponse($this, $data);
     }
 
-    protected function signature($merchantKey, $merchantCode, $paymentId, $refNo, $amount, $currency, $status)
+    protected function signature(string $merchantKey, string $merchantCode, string $paymentId, string $refNo, string $amount, string $currency, string $status)
     {
         $amount = str_replace([',', '.'], '', $amount);
 

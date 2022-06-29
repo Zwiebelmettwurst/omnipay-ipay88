@@ -20,7 +20,8 @@ class PurchaseRequestTest extends TestCase
                 'firstName' => 'Xu',
                 'lastName' => 'Ding',
                 'email' => 'xuding@spacebib.com',
-                'number' => '93804194'
+                'number' => '93804194',
+                'phone' => '93804194',
             ],
             'amount' => '1.00',
             'currency' => 'MYR',
@@ -52,7 +53,8 @@ class PurchaseRequestTest extends TestCase
             'UserContact' => '93804194',
             'Remark' => '',
             'Lang' => '',
-            'Signature' => '84dNMbfgjLMS42IqSTPqQ99cUGA=',
+            'SignatureType' => 'SHA256',
+            'Signature' => '110f0be755ccfa9373aa38104bafbc5c6e5462344e44bcfbb70439c82b4b07fa',
             'ResponseURL' => 'https://www.example.com/return',
             'BackendURL' => 'https://www.example.com/backend',
         ];
@@ -62,7 +64,7 @@ class PurchaseRequestTest extends TestCase
 
     public function testGetData_Signature()
     {
-        $signature = '84dNMbfgjLMS42IqSTPqQ99cUGA=';
+        $signature = '110f0be755ccfa9373aa38104bafbc5c6e5462344e44bcfbb70439c82b4b07fa';
 
         $result = $this->request->getData()['Signature'];
         $this->assertEquals($signature, $result);

@@ -17,9 +17,10 @@ class PurchaseRequest extends AbstractRequest
             'ProdDesc' => $this->getDescription(),
             'UserName' => $this->getCard()->getBillingName(),
             'UserEmail' => $this->getCard()->getEmail(),
-            'UserContact' => $this->getCard()->getNumber(),
+            'UserContact' => $this->getCard()->getBillingPhone(),
             'Remark' => '',
             'Lang' => '',
+            'SignatureType' => 'SHA256',
             'Signature' => $this->signature(
                 $this->getMerchantKey(),
                 $this->getMerchantCode(),
@@ -37,7 +38,7 @@ class PurchaseRequest extends AbstractRequest
         return $this->response = new PurchaseResponse($this, $data);
     }
 
-    private function signature($merchantKey, $merchantCode, $refNo, $amount, $currency)
+    protected function signature(string $merchantKey, string $merchantCode, string $refNo, string $amount, string $currency)
     {
         $amount = str_replace([',', '.'], '', $amount);
 
