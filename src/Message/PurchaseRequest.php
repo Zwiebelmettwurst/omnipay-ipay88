@@ -2,7 +2,6 @@
 
 namespace Omnipay\IPay88\Message;
 
-
 class PurchaseRequest extends AbstractRequest
 {
     public function getData()
@@ -46,5 +45,4 @@ class PurchaseRequest extends AbstractRequest
 
         return $this->createSignatureFromString(implode('', $paramsInArray));
     }
-
 }

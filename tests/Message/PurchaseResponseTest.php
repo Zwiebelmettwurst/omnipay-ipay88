@@ -2,7 +2,6 @@
 
 namespace Omnipay\IPay88\Message;
 
-
 use Omnipay\Tests\TestCase;
 
 class PurchaseResponseTest extends TestCase

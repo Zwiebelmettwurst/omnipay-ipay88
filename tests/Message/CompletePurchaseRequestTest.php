@@ -2,7 +2,6 @@
 
 namespace Omnipay\IPay88\Message;
 
-
 use Omnipay\Tests\TestCase;
 
 class CompletePurchaseRequestTest extends TestCase
@@ -12,7 +11,7 @@ class CompletePurchaseRequestTest extends TestCase
      */
     private $request;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->request = new CompletePurchaseRequest($this->getHttpClient(), $this->getHttpRequest());
 
@@ -49,7 +48,6 @@ class CompletePurchaseRequestTest extends TestCase
         $this->request->setMerchantCode('M00003');
 
         $this->request->setBackendUrl('https://www.example.com/backend');
-
     }
 
     public function testGetDataReturnCorrectComputedSignature()
@@ -78,5 +76,4 @@ class CompletePurchaseRequestTest extends TestCase
         $this->assertFalse($response->isRedirect());
         $this->assertSame('54321', $response->getTransactionReference());
     }
-
 }
