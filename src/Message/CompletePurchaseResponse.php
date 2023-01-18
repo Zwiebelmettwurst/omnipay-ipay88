@@ -2,8 +2,7 @@
 
 namespace Omnipay\IPay88\Message;
 
-use Omnipay\Common\Message\AbstractResponse;
-use Omnipay\Common\Message\RequestInterface;
+use Omnipay\Common\Message\{AbstractResponse, RequestInterface};
 
 class CompletePurchaseResponse extends AbstractResponse
 {
@@ -20,8 +19,11 @@ class CompletePurchaseResponse extends AbstractResponse
 
     protected $message;
 
-    protected $status;
+    protected $status = true;
 
+    /**
+     * @inheritDoc
+     */
     public function __construct(RequestInterface $request, $data)
     {
         parent::__construct($request, $data);
@@ -29,42 +31,44 @@ class CompletePurchaseResponse extends AbstractResponse
         if ($this->data['Status'] != 1) {
             $this->message = $this->data['ErrDesc'];
             $this->status = false;
-            return;
-        }
-
-        if ($this->data['Signature'] != $this->data['ComputedSignature']) {
+        } elseif ($this->data['Signature'] != $this->data['ComputedSignature']) {
             $this->message = $this->invalidSignatureMsg;
             $this->status = false;
-            return;
+        } else {
+            $this->message = isset($this->data['ReQueryStatus'])
+                ? ($this->reQueryResponse[$this->data['ReQueryStatus']] ?? '')
+                : '';
+            $this->status = '00' == $this->data['ReQueryStatus'];
         }
-
-        $this->message =
-            isset($this->reQueryResponse[$this->data['ReQueryStatus']]) ? $this->reQueryResponse[$this->data['ReQueryStatus']] : '';
-
-        if ('00' == $this->data['ReQueryStatus']) {
-            $this->status = true;
-            return;
-        }
-
-        $this->status = false;
-        return;
     }
 
-    public function isSuccessful()
+    /**
+     * @inheritDoc
+     */
+    public function isSuccessful(): bool
     {
         return $this->status;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getMessage()
     {
         return $this->message;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getTransactionReference()
     {
         return $this->data['TransId'];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getTransactionId()
     {
         return $this->data['RefNo'];
